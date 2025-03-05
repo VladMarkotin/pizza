@@ -1,0 +1,70 @@
+{% extends "App.twig" %}
+ {% block content %}       
+    <section class="ftco-section ftco-services">
+    	<div class="overlay"></div>
+    	
+      <div class="container">
+    		<form method="post" action="make-order" name="order">
+        <div class="row justify-content-center mb-5 pb-3">
+          <div class="col-md-7 heading-section ftco-animate text-center">
+            <h2 class="mb-4">Here is pizza menu. Choose what you like</h2>
+            <p>And you will get it with a light`s speed :)</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 ftco-animate">
+            <div class="media d-block text-center block-6 services">
+              <div class="col-md-6">
+                <p>Пиццы</p>
+                <select name="pizza">
+                  {% for v in pizzaCollection %}
+                    <option data-id="{{ v.id }}">{{ v.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="col-md-6">
+                <p>Соусы</p>
+                <select name="sauce">
+                
+                  {% for v in sauceCollection %}
+
+                  <option>{{ v.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+               <div class="col-md-6">
+                <p>Размеры</p>
+                <select name="size">
+                
+                  {% for v in sizesCollection %}
+
+                  <option data-size="{{v.size}}">{{ v.size }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>    
+          </div>
+        </div>
+    		<div class="row">
+          <div class="col-md-12 ftco-animate">
+            <div class="media d-block text-center block-6 services">
+              <div class="icon d-flex justify-content-center align-items-center mb-5">
+                <button type="submit" id="btn_order">
+                 <span class="flaticon-pizza-1"></span>
+                </button>
+              </div>
+              <div class="media-body">
+                <h3 class="heading">Make an order Now!</h3>
+                <p>Your tasty pizza is here!</p>
+              </div>
+            </div>    
+          </div>
+        </div>
+
+        </form>
+    	</div>
+    </section>
+{% endblock %}
+{% block scripts %}
+  <script src="asset/js/order.js"></script>
+ {% endblock %}
