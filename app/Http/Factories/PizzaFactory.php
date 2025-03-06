@@ -18,8 +18,8 @@ class PizzaFactory
                 return new Local($data);
             case 'pepperoni':
                 return new Pepperoni($data);
-            case 'hawaiian':
-                return new Hawaiian($data);
+            case 'hawaian':
+                return new Hawaian($data);
             case 'mashroom':
                 return new Mashroom($data);
             default:
