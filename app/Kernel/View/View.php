@@ -15,7 +15,7 @@ class View
 
     public static function getInstance()
     {
-        $loader = new \Twig\Loader\FilesystemLoader($_ENV['TEMPLATE_PATH']);
+        $loader = new \Twig\Loader\FilesystemLoader(__DIR__."/../../".$_ENV['TEMPLATE_PATH']);
         self::$twig = new \Twig\Environment($loader);
 
         self::$twig->addExtension(new \App\Kernel\View\TwigExtensions\AuthExtension());
