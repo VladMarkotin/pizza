@@ -9,6 +9,9 @@ use App\Facades\Collections\DBCollection;
 class Builder
 {
     use Operators\Conditions;
+    use Operators\GroupBy;
+    use Operators\Having;
+    use Operators\Join;
     
     private $query;
     private $compileSelect = "";
@@ -42,6 +45,11 @@ class Builder
         $this->query .= " FROM $table ";
 
         return $this;
+    }
+
+    public function as(string $name)
+    {
+        return $this->query .= " AS $name ";
     }
 
     public function sql()

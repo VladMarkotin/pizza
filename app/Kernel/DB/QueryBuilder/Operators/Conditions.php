@@ -36,4 +36,16 @@ trait Conditions
     {
         return is_string($arg2) ? "\"$arg2\"" : $arg2;
     }
+
+    
+    public function handleFieldsArray(array $fields)
+    {
+        if (count($fields) === 1) {
+            return "$fields[0]";
+        }
+
+        return implode(',', array_map(function($item) {
+            return "`" . str_replace("`", "``", $item) . "`";
+        }, $fields));
+    }
 }

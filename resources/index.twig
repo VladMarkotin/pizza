@@ -11,7 +11,7 @@
             <p>And you will get it with a light`s speed :)</p>
           </div>
         </div>
-        <div class="row">
+        {# <div class="row">
           <div class="col-md-12 ftco-animate">
             <div class="media d-block text-center block-6 services">
               <div class="col-md-6">
@@ -44,7 +44,47 @@
               </div>
             </div>    
           </div>
+        </div> #}
+         <div class="row">
+          <div class="col-md-12 ftco-animate">
+            <div class="media d-block text-center block-6 services">
+              <div class="col-md-6">
+              {% set seen = [] %}
+                <p>Пиццы</p>
+                <select name="pizza">
+                  {% for v in collection %}
+                    <option data-id="{{ v.id }}">{{ v.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="col-md-6">
+                <p>Соусы</p>
+                <select name="sauce">
+                
+                  {% for v in sauceCollection %}
+
+                  <option>{{ v.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+               <div class="col-md-6">
+                <p>Размеры</p>
+                <select name="size">
+                
+                  {% for v in collection %}
+
+                    {% if v.size not in seen %}
+                        <option data-size="{{v.size}}">{{ v.size }}</option>
+                        {% set seen = seen|merge([v.size]) %}
+                    {% endif %}
+                  {% endfor %}
+                </select>
+              </div>
+            </div>    
+          </div>
         </div>
+        
+
     		<div class="row">
           <div class="col-md-12 ftco-animate">
             <div class="media d-block text-center block-6 services">

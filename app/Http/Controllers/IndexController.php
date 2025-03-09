@@ -16,24 +16,20 @@ class IndexController extends Controller
     public function index()
     {
         $builder = $this->container->get(Builder::class);
-        $pizzaCollection = $builder->select(['id','name'])->from('pizza')->get();
-        $sauceCollection = $builder->select(['name'])->from('sauces')->get();
-        $sizesCollection = $builder->select(['size'])->distinct()->from('pizza_options')->get();
-        
-        /*
-            Я получил данные 3 разными запросами, чтобы было удобнее доставать данные на фронте.
-             Но в реальной задаче я бы получал информацию о пицце и ее размере
-            вот таким запросом:
-            SELECT pizza.id, pizza.`name`, pizza_options.size FROM pizza 
-              JOIN pizza_options ON pizza.id = pizza_options.pizza_id 
-                GROUP BY pizza.id
-        */
-        
+        $sauceCollection = $builder->select(['name'])->from('sauces')->get();        
+        $menuCollection = ($builder->select(['pizza.id', 'pizza.name', 'pizza_options.size'])
+                                ->from('pizza')
+                                ->join('pizza_options')
+                                ->on(['pizza.id', '=', 'pizza_options.pizza_id'] )
+                                ->groupBy(['pizza.id'])
+                                ->get() 
+                            );
+            
+
         return View::render('index', [
                             'App' => $_ENV['APP_NAME'],
-                            'pizzaCollection' => $pizzaCollection,
                             'sauceCollection' => $sauceCollection,
-                            'sizesCollection' => $sizesCollection,
+                            'collection' => $menuCollection,
                             ]);
     }
 

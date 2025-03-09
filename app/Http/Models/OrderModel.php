@@ -32,6 +32,6 @@ class OrderModel
     
     private function calculateTotal()
     {
-        $this->pizza->price = ($this->pizza->price * $this->rate);
+        $this->pizza->price = round($this->pizza->price * $this->rate, 2);
     }
 }
